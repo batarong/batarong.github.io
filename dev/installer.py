@@ -1,24 +1,29 @@
-#!/bin/python3
 import os
-from /etc/os-release import NAME
+import time
 
-if NAME="Debian GNU/Linux":
-  # dependencys
-  os.system("sudo apt install -y git sudo fdisk debootstrap dosfstools util-linux")
+# Read the content of the /etc/os-release file
+with open('/etc/os-release', 'r') as file:
+    for line in file:
+        if line.startswith('NAME='):
+            NAME = line.split('=')[1].strip().strip('"')
+            break
+          
+if NAME == "Debian GNU/Linux":
+    # dependencies
+    os.system("sudo apt install -y git sudo fdisk debootstrap dosfstools util-linux")
 else:
-  print("your not on debian this may not work https://github.com/batarong/Batarong-Installer/wiki/Errors")
-  print("continuing")
-  time.sleep(2)
-  print("going!!!")
+    print("You are not on Debian. This may not work. Check https://github.com/batarong/Batarong-Installer/wiki/Errors for more information.")
+    print("Continuing...")
+    time.sleep(2)
+    print("Going!!!")
 
-
-# change directory
+# Change directory
 os.chdir("/tmp")
-# grab the installer
+# Clone the installer
 os.system("sudo git clone https://github.com/batarong/Batarong-Installer.git")
-# Open batarong
+# Open Batarong
 os.chdir("/tmp/Batarong-Installer")
-# future proofing
+# Future proof
 os.system("sudo chmod 777 install.sh")
 # Get the device path from user input
 device_path = input("Enter your device path: ")
