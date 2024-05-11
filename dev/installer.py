@@ -1,9 +1,16 @@
 #!/bin/python3
 import os
+from /etc/os-release import NAME
 
+if NAME="Debian GNU/Linux":
+  # dependencys
+  os.system("sudo apt install -y git sudo fdisk debootstrap dosfstools util-linux")
+else:
+  print("your not on debian this may not work https://github.com/batarong/Batarong-Installer/wiki/Errors")
+
+
+# change directory
 os.chdir("/tmp")
-# dependencys
-os.system("sudo apt install -y git")
 # grab the installer
 os.system("sudo git clone https://github.com/batarong/Batarong-Installer.git")
 # Open batarong
