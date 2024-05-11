@@ -7,6 +7,9 @@ if NAME="Debian GNU/Linux":
   os.system("sudo apt install -y git sudo fdisk debootstrap dosfstools util-linux")
 else:
   print("your not on debian this may not work https://github.com/batarong/Batarong-Installer/wiki/Errors")
+  print("continuing")
+  time.sleep(2)
+  print("going!!!")
 
 
 # change directory
