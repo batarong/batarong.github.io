@@ -12,7 +12,7 @@ if NAME == "Debian GNU/Linux" or NAME == "Ubuntu":
     # dependencies
     os.system("sudo apt install -y git sudo fdisk debootstrap dosfstools util-linux")
 else:
-    print("You are not on Debian. This may not work. Check https://github.com/batarong/Batarong-Installer/wiki/Errors for more information.")
+    print("You are not on Debian. This may not work. Check https://github.com/batarong/Batarong-Builder/wiki/Errors for more information.")
     print("Continuing... Press Ctrl C now if your going to")
     time.sleep(3)
     print("Going!!!")
@@ -20,9 +20,9 @@ else:
 # Change directory
 os.chdir("/tmp")
 # Clone the installer
-os.system("sudo git clone https://github.com/batarong/Batarong-Installer.git")
+os.system("sudo git clone https://github.com/batarong/Batarong-Builder.git")
 # Open Batarong
-os.chdir("/tmp/Batarong-Installer")
+os.chdir("/tmp/Batarong-Builder")
 # Future proof
 os.system("sudo chmod 777 install.sh")
 # Get the device path from user input
