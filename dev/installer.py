@@ -8,7 +8,7 @@ with open('/etc/os-release', 'r') as file:
             NAME = line.split('=')[1].strip().strip('"')
             break
           
-if NAME == "Debian GNU/Linux" or NAME == "Ubuntu":
+if NAME == "Debian GNU/Linux" or NAME == "Ubuntu" or NAME == "LMDE":
     # dependencies
     os.system("sudo apt install -y git sudo fdisk debootstrap dosfstools util-linux")
 else:
