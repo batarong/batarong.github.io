@@ -10,7 +10,7 @@ with open('/etc/os-release', 'r') as file:
           
 if NAME == "Debian GNU/Linux" or NAME == "Ubuntu" or NAME == "LMDE":
     # dependencies
-    os.system("sudo apt install -y git sudo fdisk debootstrap dosfstools util-linux")
+    os.system("sudo apt install -y git sudo fdisk debootstrap dosfstools util-linux bash fdisk")
 else:
     print("You are not on Debian. This may not work. Check https://github.com/batarong/Batarong-Builder/wiki/Errors for more information.")
     print("Continuing... Press Ctrl C now if your going to")
