@@ -30,7 +30,7 @@ else:
 
 #expecting i implemented this
 # Open Batarong
-os.chdir("/root/Batarong-Builder")
+os.chdir("/root/Batarong-installer")
 # Future proof
 os.system("sudo chmod 777 install.sh")
 # USER SEE
