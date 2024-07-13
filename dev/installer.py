@@ -1,5 +1,16 @@
 import os
 import time
+import socket
+
+def check_internet():
+    try:
+        socket.create_connection(("www.google.com", 80), timeout=5)
+    except OSError:
+        print("No internet please connect you kinda need it to install an os :)")
+        print()
+        exit()
+
+check_internet()
 
 # Read the content of the /etc/os-release file
 with open('/etc/os-release', 'r') as file:
@@ -8,7 +19,7 @@ with open('/etc/os-release', 'r') as file:
             NAME = line.split('=')[1].strip().strip('"')
             break
           
-if NAME == "Debian GNU/Linux" or NAME == "Ubuntu" or NAME == "LMDE":
+if NAME == "Debian GNU/Linux" or NAME == "Ubuntu" or NAME == "LMDE" or NAME == "Batarong GNU/Linux":
     # dependencies
     os.system("sudo apt install -y git sudo fdisk debootstrap dosfstools util-linux bash fdisk")
 else:
