@@ -7,7 +7,13 @@ def check_internet(): # isnt it simple
         socket.create_connection(("www.google.com", 80), timeout=5)
     except OSError:
         print("No internet please connect you kinda need it to install an os :)")
-        print("")
+        time.sleep(2)
+        os.system("clear")
+        print("Choose a way to fix this problem")
+        print("1: Connect to wifi (nmtui)")
+        print("2: Drop to shell")
+        print("3: Continue")
+        print("Error function not implemented please contact developer")
         exit()
 
 check_internet()
