@@ -35,6 +35,9 @@ while getopts ":b:d:h" opt; do
         deviced="${device: -3}"
         device_size=$(lsblk -b -o NAME,SIZE /dev/"$deviced" | awk -v dev="$deviced" '$1==dev {print $2/1024/1024/1024}')
         result=$(round_down_to_list $(printf "%.0f" "$device_size"))
+        echo $result
+        echo $device_size
+        echo $deviced
         if [ $result -eq 0 ]; then
           echo "your disk is small"
           exit 0
