@@ -33,7 +33,8 @@ while getopts ":b:d:h" opt; do
         echo "type=83" | sudo sfdisk $device
         num_list=(15 20 25 30 35 40 45 50 55 60 65 70 75 80 85 90 95 100 105 110 115 120 125 130)
         deviced="${device: -3}"
-        result=$(round_down_to_list $(printf "%.0f" $(lsblk -b -o NAME,SIZE /dev/$deviced | awk -v dev="$deviced" '$1==dev {print $2/1024/1024/1024}') "${num_list[@]}")))
+        device_size=$(lsblk -b -o NAME,SIZE /dev/"$deviced" | awk -v dev="$deviced" '$1==dev {print $2/1024/1024/1024}')
+        result=$(round_down_to_list $(printf "%.0f" "$device_size"))
         if [ $result -eq 0 ]; then
           echo "your disk is small"
           exit 0
