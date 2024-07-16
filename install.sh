@@ -47,12 +47,14 @@ while getopts ":b:d:h" opt; do
         e2label $device1 "BIG-BATARONG"
         dosfslabel $device2 "BATA-EFI"
         sudo mount $device1 /tmp/tmp/mnt
-        sudo rsync -aAXHv / --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found"} /mnt
+        sudo rsync -aAXHv / --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found"} /tmp/tmp/mnt
+        mkdir /tmp/tmp/mnt/dev
+        mkdir /tmp/tmp/mnt/sys
         sudo mount --rbind /sys /tmp/tmp/mnt/sys/
         sudo mount --rbind /dev /tmp/tmp/mnt/dev/
-        sudo mkdir /tmp/tmp/mnt/boot/EFI
+        sudo mkdir -p /tmp/tmp/mnt/boot/EFI
         sudo mount $device2 /tmp/tmp/mnt/boot/EFI
-        sudo mkdir /tmp/tmp/mnt/boot/EFI/EFI
+        sudo mkdir -p /tmp/tmp/mnt/boot/EFI/EFI
         sudo mkdir -p /tmp/tmp/mnt/var/cache/apt/archives/partial
         cd /tmp/tmp/mnt/boot/EFI/EFI
         git clone https://github.com/batarong/refind.git
