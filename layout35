@@ -1,0 +1,10 @@
+label: gpt
+label-id: 5F5FC4ED-8F43-2940-B833-17E268FE1C22
+device: img
+unit: sectors
+first-lba: 2048
+last-lba: 73400286
+sector-size: 512
+
+img1 : start=        2048, size=    72351744, type=0FC63DAF-8483-4772-8E79-3D69D8477DE4, uuid=5916B1E0-53FF-744A-AE88-6A2F2ED76172
+img2 : start=    72353792, size=     1044480, type=0FC63DAF-8483-4772-8E79-3D69D8477DE4, uuid=A17CE733-F83A-354B-8BCA-C28E1869A303
