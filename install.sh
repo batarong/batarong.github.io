@@ -1,21 +1,6 @@
 #!/bin/bash
 
 
-round_down_to_list() {
-    number=$1
-    shift
-    num_list=("$@")
-
-    max=0
-    for num in "${num_list[@]}"; do
-        if [ $(bc -l <<< "scale=0; $num <= $number") -eq 1 ] && [ $(bc -l <<< "scale=0; $num > $max") -eq 1 ]; then
-            max=$num
-        fi
-    done
-
-    echo $max
-}
-
 while getopts ":b:d:h" opt; do
   case ${opt} in
     d )
@@ -33,8 +18,13 @@ while getopts ":b:d:h" opt; do
         echo "type=83" | sudo sfdisk $device
         num_list=(15 20 25 30 35 40 45 50 55 60 65 70 75 80 85 90 95 100 105 110 115 120 125 130)
         deviced="${device: -3}"
-        device_size=$(lsblk -b -o NAME,SIZE /dev/"$deviced" | awk -v dev="$deviced" '$1==dev {print $2/1024/1024/1024}')
-        result=$(round_down_to_list $(printf "%.0f" "$device_size"))
+        result=()
+        for num in "${num_list[@]}"; do
+            device_size=$(lsblk -b -o NAME,SIZE /dev/"$deviced" | awk -v dev="$deviced" '$1==dev {print $2/1024/1024/1024}')
+            rounded_size=$(printf "%.0f" "$device_size")
+            result+=("$rounded_size")
+        done
+
         echo $result
         echo $device_size
         echo $deviced
