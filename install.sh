@@ -12,6 +12,7 @@ sudo apt install -y systemd-timesyncd
 apt update
 apt install -y mesa-vulkan-drivers libglx-mesa0:i386 mesa-vulkan-drivers:i386 libgl1-mesa-dri:i386
 apt install -y steam-installer
+apt install -y wget
 sudo apt purge -y libreof*
 sudo apt purge -y goldendict
 sudo apt purge -y kmag
