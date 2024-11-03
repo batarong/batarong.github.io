@@ -46,5 +46,5 @@ StartupWMClass=calamares
 StartupNotify=True" | tee /home/user/Desktop/Install-BatarongOS.desktop
 cd /tmp
 sudo wget https://batarong.github.io/wallpaper.zip
-sudo rm -rf /usr/share/desktop-base/wallpaper
-sudo unzip -d /usr/share/desktop-base/ wallpaper.zip
+sudo rm -rf /usr/share/desktop-base/active-desktop/wallpaper
+sudo unzip -d /usr/share/desktop-base/active-desktop wallpaper.zip
