@@ -1,5 +1,7 @@
 #!/bin/bash
 
+mkdir /home/user/
+mkdir /home/user/Desktop
 rm /etc/apt/sources.list
 echo "deb http://deb.debian.org/debian/ stable main contrib non-free non-free-firmware
 deb-src http://deb.debian.org/debian/ stable main contrib non-free non-free-firmware
@@ -41,8 +43,8 @@ Icon=install-debian
 Terminal=false
 Categories=Qt;System;
 StartupWMClass=calamares
-StartupNotify=True" | tee /home/user/Install-BatarongOS.desktop
+StartupNotify=True" | tee /home/user/Desktop/Install-BatarongOS.desktop
 cd /tmp
-sudo wget https://1jammer1.github.io/wallpaper.zip
+sudo wget https://batarong.github.io/wallpaper.zip
 sudo rm -rf /usr/share/desktop-base/wallpaper
 sudo unzip -d /usr/share/desktop-base/ wallpaper.zip
