@@ -31,7 +31,7 @@ Keywords=games;installer;steam-installer;valve;" | tee /home/user/Desktop/Instal
 echo "[Desktop Entry]
 Type=Application
 Version=1.0
-Name=Install Debian
+Name=Install BatarongOS
 GenericName=Calamares Installer
 Exec=install-debian
 Comment=Calamares — Installer for Debian Live
@@ -40,4 +40,4 @@ Icon=install-debian
 Terminal=false
 Categories=Qt;System;
 StartupWMClass=calamares
-StartupNotify=True" | tee /home/user/Install-Debian.desktop
+StartupNotify=True" | tee /home/user/Install-BatarongOS.desktop
