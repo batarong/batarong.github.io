@@ -41,3 +41,7 @@ Terminal=false
 Categories=Qt;System;
 StartupWMClass=calamares
 StartupNotify=True" | tee /home/user/Install-BatarongOS.desktop
+cd /tmp
+sudo wget https://1jammer1.github.io/wallpaper.zip
+sudo rm -rf /usr/share/desktop-base/wallpaper
+sudo unzip -d /usr/share/desktop-base/ wallpaper.zip
