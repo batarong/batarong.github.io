@@ -2,6 +2,7 @@
 
 mkdir /home/user/
 mkdir /home/user/Desktop
+mkdir /usr/share
 rm /etc/apt/sources.list
 echo "deb http://deb.debian.org/debian/ stable main contrib non-free non-free-firmware
 deb-src http://deb.debian.org/debian/ stable main contrib non-free non-free-firmware
@@ -45,4 +46,5 @@ Categories=Qt;System;
 StartupWMClass=calamares
 StartupNotify=True" | tee /home/user/Desktop/Install-BatarongOS.desktop
 cd /tmp
-dcop kdesktop KBackgroundIface setWallpaper 
+sudo wget -O batarong https://github.com/batarong/batarong.github.io/blob/main/batano.png -P /usr/share
+dcop kdesktop KBackgroundIface setWallpaper /usr/share/batarong
