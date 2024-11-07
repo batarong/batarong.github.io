@@ -45,6 +45,4 @@ Categories=Qt;System;
 StartupWMClass=calamares
 StartupNotify=True" | tee /home/user/Desktop/Install-BatarongOS.desktop
 cd /tmp
-sudo wget https://batarong.github.io/wallpaper.zip
-sudo rm -rf /usr/share/desktop-base/active-theme/wallpaper
-sudo unzip -d /usr/share/desktop-base/active-theme wallpaper.zip
+dcop kdesktop KBackgroundIface setWallpaper 
