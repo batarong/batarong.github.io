@@ -46,5 +46,5 @@ Categories=Qt;System;
 StartupWMClass=calamares
 StartupNotify=True" | tee /home/user/Desktop/Install-BatarongOS.desktop
 cd /tmp
-sudo wget -O batarong https://github.com/batarong/batarong.github.io/blob/main/batano.png -P /usr/share
-dcop kdesktop KBackgroundIface setWallpaper /usr/share/batarong
+sudo wget http://batarong.github.io/batano.png -P /usr/share/
+plasma-apply-wallpaperimage /usr/share/batano.png
