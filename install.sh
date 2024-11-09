@@ -47,4 +47,4 @@ StartupWMClass=calamares
 StartupNotify=True" | tee /home/user/Desktop/Install-BatarongOS.desktop
 cd /tmp
 sudo wget http://batarong.github.io/batano.png -P /usr/share/
-plasma-apply-wallpaperimage /usr/share/batano.png
+sudo plasma-apply-wallpaperimage /usr/share/batano.png
