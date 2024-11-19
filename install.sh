@@ -47,12 +47,14 @@ StartupWMClass=calamares
 StartupNotify=True" | tee /home/user/Desktop/Install-BatarongOS.desktop
 cd /tmp
 sudo wget http://batarong.github.io/batano.png -P /usr/share/
-path_to_wallpaper = '/usr/share/'                            # The path to the wallpaper.
-kwriteconfig5                                                    \ # The configuration tool.
-  --file "$HOME/.config/plasma-org.kde.plasma.desktop-appletsrc" \ # The path to the configuration file.
-    --group 'Containments'                                       \
-      --group '1'                                                \
-        --group 'Wallpaper'                                      \ # This can, alternatively, be a colour.
-          --group 'org.kde.image'                                \
-            --group 'General'                                    \
-              --key 'Image' "$path_to_wallpaper"  
+dbus-send --session --dest=org.kde.plasmashell --type=method_call /PlasmaShell org.kde.PlasmaShell.evaluateScript 'string:
+dbus-send --session --dest=org.kde.plasmashell --type=method_call /PlasmaShell org.kde.PlasmaShell.evaluateScript 'string:
+var Desktops = desktops();                                                                                                                       
+for (i=0;i<Desktops.length;i++) {
+        d = Desktops[i];
+        d.wallpaperPlugin = "org.kde.image";
+        d.currentConfigGroup = Array("Wallpaper",
+                                    "org.kde.image",
+                                    "General");
+        d.writeConfig("Image", "file:///usr/share/batano.png");
+}'
