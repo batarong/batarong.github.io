@@ -47,14 +47,12 @@ StartupWMClass=calamares
 StartupNotify=True" | tee /home/user/Desktop/Install-BatarongOS.desktop
 cd /tmp
 sudo wget http://batarong.github.io/batano.png -P /usr/share/
-dbus-send --session --dest=org.kde.plasmashell --type=method_call /PlasmaShell org.kde.PlasmaShell.evaluateScript 'string:
-dbus-send --session --dest=org.kde.plasmashell --type=method_call /PlasmaShell org.kde.PlasmaShell.evaluateScript 'string:
-var Desktops = desktops()                                                                                                                     
-for (i=0;i<Desktops.length;i++) {
-        d = Desktops[i];
+qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript '
+    var allDesktops = desktops();
+    for (i=0;i<allDesktops.length;i++) 
+    {
+        d = allDesktops[i];
         d.wallpaperPlugin = "org.kde.image";
-        d.currentConfigGroup = Array("Wallpaper",
-                                    "org.kde.image",
-                                    "General");
-        d.writeConfig("Image", "file:///usr/share/batano.png");
-}'
+        d.currentConfigGroup = Array("Wallpaper", "org.kde.image", "General");
+        d.writeConfig("Image", "file:///usr/share/batano.png")
+    }
