@@ -49,7 +49,7 @@ cd /tmp
 sudo wget http://batarong.github.io/batano.png -P /usr/share/
 dbus-send --session --dest=org.kde.plasmashell --type=method_call /PlasmaShell org.kde.PlasmaShell.evaluateScript 'string:
 dbus-send --session --dest=org.kde.plasmashell --type=method_call /PlasmaShell org.kde.PlasmaShell.evaluateScript 'string:
-var Desktops = desktops();                                                                                                                       
+var Desktops = desktops()                                                                                                                     
 for (i=0;i<Desktops.length;i++) {
         d = Desktops[i];
         d.wallpaperPlugin = "org.kde.image";
