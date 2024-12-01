@@ -48,3 +48,24 @@ StartupNotify=True" | tee /home/user/Desktop/Install-BatarongOS.desktop
 cd /tmp
 sudo wget http://batarong.github.io/batano.png -P /usr/share/wallpapers/Lines/contents/images
 qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'var allDesktops = desktops();print (allDesktops);for (i=0;i<allDesktops.length;i++) {d = allDesktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper", "org.kde.image", "General");d.writeConfig("Image", "file:///usr/share/wallpapers/Lines/contents/images")}'
+
+# batarong game
+mkdir /batarong-reserved
+cd /batarong-reserved
+sudo wget http://batarong.github.io/batarong.png -P /bin
+git clone https://github.com/batarong/batarong-games.git
+HTML_FILE_PATH="/batarong-reserved/batarong-games/batarong-game1.html"
+MENU_NAME="Batarong Game"
+MENU_ICON="/bin/batarong.png"
+DESKTOP_FILE=/usr/share/applications/batarong_game.desktop
+echo "[Desktop Entry]" > $DESKTOP_FILE
+echo "Type=Application" >> $DESKTOP_FILE
+echo "Name=$MENU_NAME" >> $DESKTOP_FILE
+echo "Exec=xdg-open $HTML_FILE_PATH" >> $DESKTOP_FILE
+echo "Icon=$MENU_ICON" >> $DESKTOP_FILE
+echo "Categories=Batarong;" >> $DESKTOP_FILE
+DIRECTORY_FILE=/usr/share/desktop-directories/batarong.directory
+echo "[Desktop Entry]" > $DIRECTORY_FILE
+echo "Type=Directory" >> $DIRECTORY_FILE
+echo "Name=Batarong" >> $DIRECTORY_FILE
+echo "Icon=$MENU_ICON" >> $DIRECTORY_FILE
