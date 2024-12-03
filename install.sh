@@ -53,7 +53,7 @@ qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'var a
 
 # plymouth
 sudo wget -O batarong https://github.com/batarong/batarong-plymouth -P /usr/share/plymouth/themes/
-plymouth-set-default-theme -R /usr/share/plymouth/themes/batarong
+sudo /usr/share/plymouth-set-default-theme -R batarong
 
 # batarong game
 mkdir /batarong-reserved
