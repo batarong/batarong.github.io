@@ -48,8 +48,8 @@ StartupNotify=True" | tee /home/user/Desktop/Install-BatarongOS.desktop
 cd /tmp
 
 # wallpaper
-sudo wget http://batarong.github.io/batano.png -P /usr/share/wallpapers/Lines/contents/images
-qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'var allDesktops = desktops();print (allDesktops);for (i=0;i<allDesktops.length;i++) {d = allDesktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper", "org.kde.image", "General");d.writeConfig("Image", "file:///usr/share/wallpapers/Lines/contents/images")}'
+sudo wget http://batarong.github.io/batano.png -P /usr/share/wallpapers/
+sudo gsettings set org.cinnamon.desktop.background picture-uri  "file:///usr/share/wallpapers/batano.png"
 
 # plymouth
 sudo wget -O batarong https://github.com/batarong/batarong-plymouth -P /usr/share/plymouth/themes/
@@ -75,5 +75,6 @@ echo "[Desktop Entry]" > $DIRECTORY_FILE
 echo "Type=Directory" >> $DIRECTORY_FILE
 echo "Name=Batarong" >> $DIRECTORY_FILE
 echo "Icon=$MENU_ICON" >> $DIRECTORY_FILE
+# branding
 echo "[Branding]
 logo=/bin/batarong.png" | tee /etc/calamares/branding/branding.desc
