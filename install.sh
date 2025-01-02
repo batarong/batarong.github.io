@@ -75,3 +75,5 @@ echo "[Desktop Entry]" > $DIRECTORY_FILE
 echo "Type=Directory" >> $DIRECTORY_FILE
 echo "Name=Batarong" >> $DIRECTORY_FILE
 echo "Icon=$MENU_ICON" >> $DIRECTORY_FILE
+echo "[Branding]
+logo=/bin/batarong.png" | tee /etc/calamares/branding/branding.desc
