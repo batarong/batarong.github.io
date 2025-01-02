@@ -18,7 +18,6 @@ apt install -y steam-installer
 apt install -y wget
 sudo apt purge -y libreof*
 sudo apt purge -y goldendict
-sudo apt purge -y kmag
 sudo apt autoremove -y
 sudo rm -rf /home/user/Desktop/steam.desktop
 sudo rm -rf /home/user/Desktop/install-debian.desktop
@@ -56,25 +55,25 @@ sudo wget -O batarong https://github.com/batarong/batarong-plymouth -P /usr/shar
 sudo /usr/share/plymouth-set-default-theme -R batarong
 
 # batarong game
-mkdir /batarong-reserved
-cd /batarong-reserved
+#mkdir /batarong-reserved
+#cd /batarong-reserved
 sudo wget http://batarong.github.io/batarong.png -P /bin
-git clone https://github.com/batarong/batarong-games.git
-HTML_FILE_PATH="/batarong-reserved/batarong-games/batarong-game1.html"
-MENU_NAME="Batarong Game"
-MENU_ICON="/bin/batarong.png"
-DESKTOP_FILE=/usr/share/applications/batarong_game.desktop
-echo "[Desktop Entry]" > $DESKTOP_FILE
-echo "Type=Application" >> $DESKTOP_FILE
-echo "Name=$MENU_NAME" >> $DESKTOP_FILE
-echo "Exec=xdg-open $HTML_FILE_PATH" >> $DESKTOP_FILE
-echo "Icon=$MENU_ICON" >> $DESKTOP_FILE
-echo "Categories=Batarong;" >> $DESKTOP_FILE
-DIRECTORY_FILE=/usr/share/desktop-directories/batarong.directory
-echo "[Desktop Entry]" > $DIRECTORY_FILE
-echo "Type=Directory" >> $DIRECTORY_FILE
-echo "Name=Batarong" >> $DIRECTORY_FILE
-echo "Icon=$MENU_ICON" >> $DIRECTORY_FILE
+#git clone https://github.com/batarong/batarong-games.git
+#HTML_FILE_PATH="/batarong-reserved/batarong-games/batarong-game1.html"
+#MENU_NAME="Batarong Game"
+#MENU_ICON="/bin/batarong.png"
+#DESKTOP_FILE=/usr/share/applications/batarong_game.desktop
+#echo "[Desktop Entry]" > $DESKTOP_FILE
+#echo "Type=Application" >> $DESKTOP_FILE
+#echo "Name=$MENU_NAME" >> $DESKTOP_FILE
+#echo "Exec=xdg-open $HTML_FILE_PATH" >> $DESKTOP_FILE
+#echo "Icon=$MENU_ICON" >> $DESKTOP_FILE
+#echo "Categories=Batarong;" >> $DESKTOP_FILE
+#DIRECTORY_FILE=/usr/share/desktop-directories/batarong.directory
+#echo "[Desktop Entry]" > $DIRECTORY_FILE
+#echo "Type=Directory" >> $DIRECTORY_FILE
+#echo "Name=Batarong" >> $DIRECTORY_FILE
+#echo "Icon=$MENU_ICON" >> $DIRECTORY_FILE
 # branding
-echo "[Branding]
-logo=/bin/batarong.png" | tee /etc/calamares/branding/branding.desc
+#echo "[Branding]
+#logo=/bin/batarong.png" | tee /etc/calamares/branding/branding.desc
