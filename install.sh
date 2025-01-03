@@ -4,12 +4,12 @@ mkdir /home/user/
 mkdir /home/user/Desktop
 mkdir /usr/share
 rm /etc/apt/sources.list
-echo "deb http://deb.debian.org/debian/ stable main contrib non-free non-free-firmware
-deb-src http://deb.debian.org/debian/ stable main contrib non-free non-free-firmware
-deb http://security.debian.org/debian-security stable-security main contrib non-free non-free-firmware
-deb-src http://security.debian.org/debian-security stable-security main contrib non-free non-free-firmware
-deb http://deb.debian.org/debian/ stable-updates main contrib non-free non-free-firmware
-deb-src http://deb.debian.org/debian/ stable-updates main contrib non-free non-free-firmware" | tee /etc/apt/sources.list
+#echo "deb http://deb.debian.org/debian/ stable main contrib non-free non-free-firmware
+#deb-src http://deb.debian.org/debian/ stable main contrib non-free non-free-firmware
+#deb http://security.debian.org/debian-security stable-security main contrib non-free non-free-firmware
+#deb-src http://security.debian.org/debian-security stable-security main contrib non-free non-free-firmware
+#deb http://deb.debian.org/debian/ stable-updates main contrib non-free non-free-firmware
+#deb-src http://deb.debian.org/debian/ stable-updates main contrib non-free non-free-firmware" | tee /etc/apt/sources.list
 dpkg --add-architecture i386
 apt update
 sudo apt install -y systemd-timesyncd
@@ -31,20 +31,24 @@ Name=Install Steam
 Terminal=false
 Type=Application
 Keywords=games;installer;steam-installer;valve;" | tee /home/user/Desktop/Install-Steam.desktop
-echo "[Desktop Entry]
-Type=Application
-Version=1.0
-Name=Install BatarongOS
-GenericName=Calamares Installer
-Exec=install-debian
-Comment=Calamares — Installer for Debian Live
-Keywords=calamares;system;install;debian;installer
-Icon=install-debian
-Terminal=false
-Categories=Qt;System;
-StartupWMClass=calamares
-StartupNotify=True" | tee /home/user/Desktop/Install-BatarongOS.desktop
+#echo "[Desktop Entry]
+#Type=Application
+#Version=1.0
+#Name=Install BatarongOS
+#GenericName=Calamares Installer
+#Exec=install-debian
+#Comment=Calamares — Installer for Debian Live
+#Keywords=calamares;system;install;debian;installer
+#Icon=install-debian
+#Terminal=false
+#Categories=Qt;System;
+#StartupWMClass=calamares
+#StartupNotify=True" | tee /home/user/Desktop/Install-BatarongOS.desktop
 cd /tmp
+
+
+dbus-uuidgen --ensure=/etc/machine-id
+dbus-uuidgen --ensure
 
 # wallpaper
 sudo wget http://batarong.github.io/batano.png -P /usr/share/wallpapers/
