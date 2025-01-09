@@ -4,12 +4,8 @@ mkdir /home/user/
 mkdir /home/user/Desktop
 mkdir /usr/share
 rm /etc/apt/sources.list
-#echo "deb http://deb.debian.org/debian/ stable main contrib non-free non-free-firmware
-#deb-src http://deb.debian.org/debian/ stable main contrib non-free non-free-firmware
-#deb http://security.debian.org/debian-security stable-security main contrib non-free non-free-firmware
-#deb-src http://security.debian.org/debian-security stable-security main contrib non-free non-free-firmware
-#deb http://deb.debian.org/debian/ stable-updates main contrib non-free non-free-firmware
-#deb-src http://deb.debian.org/debian/ stable-updates main contrib non-free non-free-firmware" | tee /etc/apt/sources.list
+echo "deb http://deb.debian.org/debian/ testing main contrib non-free non-free-firmware
+deb-src http://deb.debian.org/debian/ testing main contrib non-free non-free-firmware" | tee /etc/apt/sources.list
 dpkg --add-architecture i386
 apt update
 sudo apt install -y systemd-timesyncd
