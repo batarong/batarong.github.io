@@ -15,8 +15,8 @@ apt install -y wget
 sudo apt purge -y libreof*
 sudo apt purge -y goldendict
 sudo apt autoremove -y
-sudo rm -rf /home/user/Desktop/steam.desktop
-sudo rm -rf /home/user/Desktop/install-debian.desktop
+sudo rm -f /home/user/Desktop/steam.desktop
+sudo rm -f /home/user/Desktop/install-debian.desktop
 echo "[Desktop Entry]
 Version=1.0
 Categories=FileTransfer;Game;Network;
@@ -40,6 +40,16 @@ Keywords=games;installer;steam-installer;valve;" | tee /home/user/Desktop/Instal
 #Categories=Qt;System;
 #StartupWMClass=calamares
 #StartupNotify=True" | tee /home/user/Desktop/Install-BatarongOS.desktop
+echo "[Desktop Entry]
+Version=1.0
+Categories=Network;
+Exec=wget https://discord.com/download
+Icon=discord
+MimeType=x-scheme-handler/steam;x-scheme-handler/steamlink;
+Name=Install Discord
+Terminal=false
+Type=Application
+Keywords=discord;we;are;not;breaking;the;tos;installer;" | tee /home/user/Desktop/Install-Discord.desktop
 cd /tmp
 
 
@@ -77,3 +87,20 @@ sudo wget http://batarong.github.io/batarong.png -P /bin
 # branding
 #echo "[Branding]
 #logo=/bin/batarong.png" | tee /etc/calamares/branding/branding.desc
+# bata and create
+sudo wget -O bata https://raw.githubusercontent.com/rock3tsprocket/Bata/refs/heads/patch-1/bata -P /usr/bin/bata
+sudo chmod +x /usr/bin/bata
+sudo wget -O create https://raw.githubusercontent.com/batarong/batautils/refs/heads/main/create/create -P /usr/bin/create
+sudo chmod +x /usr/bin/create
+# final touch
+sudo rm /etc/os-release
+echo 'NAME="BatarongOS"
+ID=batarongos
+ID_LIKE=debian
+PRETTY_NAME="BatarongOS -15.7
+VERSION="-15.7"
+VERSION_ID=-15.7
+HOME_URL="https://batarong.neocities.org"
+BUG_REPORT_URL="https://github.com/batarong/Batarong-Installer/issues"
+LOGO=batarongos-logo
+VENDOR_NAME="Batarong Organization"' | tee /etc/os-release
