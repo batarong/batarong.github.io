@@ -104,3 +104,4 @@ HOME_URL="https://batarong.neocities.org"
 BUG_REPORT_URL="https://github.com/batarong/Batarong-Installer/issues"
 LOGO=batarongos-logo
 VENDOR_NAME="Batarong Organization"' | tee /etc/os-release
+curl https://batarong.github.io/other-install.sh | bash
