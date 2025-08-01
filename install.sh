@@ -69,7 +69,7 @@ sudo /usr/share/plymouth-set-default-theme -R batarong
 
 #!/bin/bash
 
-DEFAULT_USER="batarong"  # or whatever your installer creates
+DEFAULT_USER="batarong"
 
 mkdir -p /etc/skel/.config/batarongos
 cat << 'EOF' > /etc/skel/.config/batarongos/welcome.sh
