@@ -8,6 +8,7 @@ echo "deb http://deb.debian.org/debian/ testing main contrib non-free non-free-f
 deb-src http://deb.debian.org/debian/ testing main contrib non-free non-free-firmware" | tee /etc/apt/sources.list
 dpkg --add-architecture i386
 apt update
+apt install zenity -y
 sudo apt install -y systemd-timesyncd
 apt install -y mesa-vulkan-drivers libglx-mesa0:i386 mesa-vulkan-drivers:i386 libgl1-mesa-dri:i386
 apt install -y steam-installer
@@ -63,6 +64,47 @@ sudo gsettings set org.cinnamon.desktop.background picture-uri  "file:///usr/sha
 # plymouth
 sudo wget -O batarong https://github.com/batarong/batarong-plymouth -P /usr/share/plymouth/themes/
 sudo /usr/share/plymouth-set-default-theme -R batarong
+
+# sorry for the mess(welcome screen)
+
+#!/bin/bash
+
+DEFAULT_USER="batarong"  # or whatever your installer creates
+
+mkdir -p /etc/skel/.config/batarongos
+cat << 'EOF' > /etc/skel/.config/batarongos/welcome.sh
+#!/bin/bash
+
+if [ ! -f "$HOME/.batarongos_first_login_done" ]; then
+  zenity --info --title="Welcome to BatarongOS" \
+         --text="🦇 Welcome to BatarongOS!!!!! :D \n\nBased Off of Debian.\n\Github: https://github.com/batarong"
+  touch "$HOME/.batarongos_first_login_done"
+fi
+EOF
+
+chmod +x /etc/skel/.config/batarongos/welcome.sh
+
+mkdir -p /etc/skel/.config/systemd/user
+cat << EOF > /etc/skel/.config/systemd/user/batarongos-welcome.service
+[Unit]
+Description=BatarongOS First Login Welcome
+After=default.target
+
+[Service]
+Type=oneshot
+ExecStart=%h/.config/batarongos/welcome.sh
+
+[Install]
+WantedBy=default.target
+EOF
+
+mkdir -p /etc/skel/.config/systemd/user/default.target.wants
+ln -s ../batarongos-welcome.service /etc/skel/.config/systemd/user/default.target.wants/batarongos-welcome.service
+
+if id "$DEFAULT_USER" &>/dev/null; then
+  cp -r /etc/skel/.config "/home/$DEFAULT_USER/"
+  chown -R "$DEFAULT_USER:$DEFAULT_USER" "/home/$DEFAULT_USER/.config"
+fi
 
 # batarong game
 #mkdir /batarong-reserved
