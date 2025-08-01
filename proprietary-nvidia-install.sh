@@ -92,6 +92,51 @@ sudo wget -O bata https://raw.githubusercontent.com/rock3tsprocket/Bata/refs/hea
 sudo chmod +x /usr/bin/bata
 sudo wget -O create https://raw.githubusercontent.com/batarong/batautils/refs/heads/main/create/create -P /usr/bin/create
 sudo chmod +x /usr/bin/create
+
+
+# Sorry for this mess
+
+#!/bin/bash
+
+DEFAULT_USER="batarong"
+
+mkdir -p /etc/skel/.config/batarongos
+cat << 'EOF' > /etc/skel/.config/batarongos/welcome.sh
+#!/bin/bash
+
+if [ ! -f "$HOME/.batarongos_first_login_done" ]; then
+  zenity --info --title="Welcome to BatarongOS" \
+         --text="Welcome to BatarongOS!!!:D!\n\Github: https://github.com/batarong\n\nMade by Mam Man and others"
+  touch "$HOME/.batarongos_first_login_done"
+fi
+EOF
+
+chmod +x /etc/skel/.config/batarongos/welcome.sh
+
+mkdir -p /etc/skel/.config/systemd/user
+cat << EOF > /etc/skel/.config/systemd/user/batarongos-welcome.service
+[Unit]
+Description=BatarongOS First Login Welcome
+After=default.target
+
+[Service]
+Type=oneshot
+ExecStart=%h/.config/batarongos/welcome.sh
+
+[Install]
+WantedBy=default.target
+EOF
+
+mkdir -p /etc/skel/.config/systemd/user/default.target.wants
+ln -s ../batarongos-welcome.service /etc/skel/.config/systemd/user/default.target.wants/batarongos-welcome.service
+
+if id "$DEFAULT_USER" &>/dev/null; then
+  cp -r /etc/skel/.config "/home/$DEFAULT_USER/"
+  chown -R "$DEFAULT_USER:$DEFAULT_USER" "/home/$DEFAULT_USER/.config"
+fi
+
+
+
 # final touch
 sudo rm /etc/os-release
 echo 'NAME="BatarongOS"
