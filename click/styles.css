@@ -30,3 +30,37 @@
     display: block;
 }
 
+
+.batayt {
+    position: absolute;
+    left: 2220px;
+    bottom: 1150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Remove width and height here */
+}
+
+.batayt button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px; /* space between h2 and img */
+    width: 256px;
+    height: 60px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    margin: 0 auto;
+}
+
+.batayt img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.batayt-count h2 {
+    margin: 0;
+    font-size: 2em;
+}
