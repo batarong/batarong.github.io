@@ -7,60 +7,60 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <script>
-        prompt("You may need to zoom out a little bit for the size to be correct. Email foxxertech@aol.com to report bugs.")
-    </script>
-<div class="upgrades">
 
-        <div class="clickhere">
-            <p id="totalrate">Total Income: +0/sec</p>
-            <p id="batarongsclicked">Batarongs: 0</p>
-        
-            <button id="batarongbut">
-                <img src="assets/images/Batarong.png" alt="Batarong">
-            </button>
+<button class="report-bug-btn" onclick="window.location='mailto:foxxertech@aol.com'">
+    Report a bug
+</button>
 
-        </div>
-        <!--Bataroung Youtube-->
-        <div class="batayt">
-            <button id="bataytclick">
-                <span class="batayt-count"><h2 id="bycount">0</h2></span>
-                <img src="assets/images/bty.png">
-            </button>
-            <p id="bytcost">
-                Cost: 10 Batarongs.<br>
-                Doubles click production
-            </p>
-        </div>
 
-        <!--Sopv Upgrade-->
-        <div class="sopv">
-            <button id="sopvclick">
-                <span class="sopv-count"><h2 id="sopvcount">0</h2></span>
-                <img src="assets/images/sopv.png">
-            </button>
-            <p id="sopvcost">
-            Cost: 100 Batarongs.<br>
-            Gives 1 batarong /sec
-            </p>
-            <p id="sopvrate">Income: +0/sec</p>
-        </div>
 
-     <!--Med Upgrade-->   
-        <div class="med">
-            <button id="medclick">
-                <span class="med-count"><h2 id="medcount">0</h2></span>
-                <img src="assets/images/med.png">
-         </button>
-            <p id="medcost">
-                Cost: 500 Batarongs.<br>
-                Gives 3 batarong /sec
-            </p>
-            <p id="medrate">Income: +0/sec</p>
-        </div>
-        
+<!-- Main clicker -->
+<div class="clickhere">
+    <p id="totalrate">Total Income: +0/sec</p>
+    <p id="batarongsclicked">Batarongs: 0</p>
+    
+    <button id="batarongbut">
+        <img src="assets/images/Batarong.png" alt="Batarong">
+    </button>
 </div>
 
-    <script src="index.js"></script>
+<!-- Button to open upgrades -->
+<button id="openUpgrades" class="upgrade-toggle-btn">Show Upgrades</button>
+
+<!-- Upgrades panel -->
+<div id="upgradesPanel" class="upgrades-panel">
+    <button id="closeUpgrades" class="close-btn">X</button>
+    
+    <!-- YouTube Upgrade -->
+    <div class="upgrade-item">
+        <button id="bataytclick">
+            <span class="batayt-count"><h2 id="bycount">0</h2></span>
+            <img src="assets/images/bty.png" alt="YouTube Upgrade">
+        </button>
+        <p id="bytcost">Cost: 10 Batarongs.<br>Doubles click production</p>
+    </div>
+
+    <!-- SOPV Upgrade -->
+    <div class="upgrade-item">
+        <button id="sopvclick">
+            <span class="sopv-count"><h2 id="sopvcount">0</h2></span>
+            <img src="assets/images/sopv.png" alt="SOPV Upgrade">
+        </button>
+        <p id="sopvcost">Cost: 100 Batarongs.<br>Gives 1 batarong /sec</p>
+        <p id="sopvrate">Income: +0/sec</p>
+    </div>
+
+    <!-- MED Upgrade -->
+    <div class="upgrade-item">
+        <button id="medclick">
+            <span class="med-count"><h2 id="medcount">0</h2></span>
+            <img src="assets/images/med.png" alt="MED Upgrade">
+        </button>
+        <p id="medcost">Cost: 500 Batarongs.<br>Gives 3 batarongs /sec</p>
+        <p id="medrate">Income: +0/sec</p>
+    </div>
+</div>
+
+<script src="index.js"></script>
 </body>
 </html>

@@ -1,101 +1,201 @@
+/* Body background */
 body {
-  margin: 0;
-  background-color: #111;
-  color: white;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  min-height: 100vh;
-  overflow-x: hidden;
+    background-color: #000000; /* full black */
+    color: white; /* default text color */
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* --- Clicker section --- */
+/* Main clicker */
 .clickhere {
-  text-align: center;
-  margin-top: 4vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%); /* slightly more upward to center image */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .clickhere p {
-  font-size: clamp(1rem, 3vw, 2rem);
-  margin: 0.5em 0;
-}
-
-#totalrate {
-  color: cyan;
-  font-weight: bold;
-  font-size: clamp(1rem, 2.5vw, 1.8rem);
+    font-size: 90px;
+    margin: 0 0 20px 0;
+    color: #ffffff; /* ensure counter text is visible */
 }
 
 .clickhere button {
-  width: clamp(200px, 30vw, 500px);
-  aspect-ratio: 1 / 1;
-  border: none;
-  background: transparent;
-  cursor: pointer;
+    width: 550px;
+    height: 500px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
 }
 
 .clickhere img {
-  width: 100%;
-  height: 100%;
-  display: block;
+    width: 100%;
+    height: 100%;
+    display: block;
 }
 
-/* --- Upgrade panels --- */
-.upgrades {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
-  margin-top: 5vh;
-  width: 100%;
+/* Upgrade panel */
+.upgrades-panel {
+    position: fixed;
+    top: 50px;
+    right: -400px; /* offscreen initially */
+    width: 350px;
+    max-height: 80vh;
+    background: #000000; /* full black panel */
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(255,255,255,0.2); /* subtle glow for visibility */
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 1000;
+    transition: right 0.5s ease; /* smooth slide */
 }
 
-.upgrade {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
+.upgrades-panel.open {
+    right: 50px; /* slide-in position */
 }
 
-.upgrade button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  width: clamp(180px, 20vw, 256px);
-  height: clamp(40px, 5vh, 60px);
-  border: none;
-  background: transparent;
-  cursor: pointer;
+.close-btn {
+    align-self: flex-end;
+    background: #ff0000;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 6px;
+    cursor: pointer;
 }
 
-.upgrade img {
-  width: 100%;
-  height: 100%;
-  display: block;
+.upgrade-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.upgrade h2 {
-  margin: 0;
-  font-size: clamp(1.2rem, 2vw, 2rem);
+/* Toggle button */
+.upgrade-toggle-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    background: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
 }
 
+/* Total income display */
+#totalrate {
+    color: #00bfff; /* light blue */
+    font-size: 1em; /* slightly smaller */
+    font-weight: bold;
+}
+
+/* Upgrade rates */
 #sopvrate, #medrate {
-  color: limegreen;
-  font-weight: bold;
+    color: limegreen;
+    font-weight: bold;
 }
 
-/* --- Responsive layout for wider screens --- */
-@media (min-width: 1000px) {
-  .upgrades {
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
+/* Upgrade buttons layout */
+.batayt button,
+.sopv button,
+.med button {
+    background: #222;           /* dark background */
+    border-radius: 12px;
+    padding: 10px 15px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* space between text/counter and image */
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0,255,0,0.2);
+}
 
-  .upgrade {
-    margin: 0 2rem;
-  }
+/* Hover effect for buttons */
+.batayt button:hover,
+.sopv button:hover,
+.med button:hover {
+    filter: brightness(1.2);
+    box-shadow: 0 0 10px rgba(0,255,0,0.3);
+}
+
+/* Image inside upgrade buttons */
+.batayt button img,
+.sopv button img,
+.med button img {
+    width: 50px;      /* small and uniform */
+    height: 50px;
+    object-fit: contain;
+    margin-left: 10px; /* spacing from counter/text */
+}
+
+/* Counter box inside buttons */
+.batayt-count h2,
+.sopv-count h2,
+.med-count h2 {
+    background: #111;           /* dark gray */
+    color: limegreen;           /* number color */
+    padding: 4px 8px;
+    border-radius: 6px;
+    min-width: 35px;
+    text-align: center;
+    font-size: 1.5em;
+    box-shadow: 0 0 5px rgba(0,255,0,0.3);
+    margin: 0;
+}
+
+/* Text label for upgrade inside button */
+.batayt-count,
+.sopv-count,
+.med-count {
+    flex-grow: 1;               /* takes available space */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+/* Buttons hover effect for all */
+button:hover {
+    filter: brightness(1.2);
+}
+
+/* Optional: make input text or counters more readable */
+h2, p {
+    color: white;
+}
+
+/* Report bug button */
+.report-bug-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    padding: 10px 15px;
+    border-radius: 5px; /* rounded like a pebble */
+    background: #f44336; /* red button */
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    z-index: 1002;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.3); /* subtle shadow */
+    transition: all 0.2s ease;
+}
+
+.report-bug-btn:hover {
+    background: #e53935; /* darker red */
+    transform: translateY(-2px); /* lift effect */
+    box-shadow: 0 6px 12px rgba(0,0,0,0.4); /* bigger shadow on hover */
 }

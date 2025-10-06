@@ -1,5 +1,3 @@
-console.log("Javascript is Armed and Loaded!")
-
 // === Load saved values or set defaults ===
 let batarongs = Number(localStorage.getItem("batarongs")) || 0;
 let increment = Number(localStorage.getItem("increment")) || 1;
@@ -18,8 +16,17 @@ let medbought = Number(localStorage.getItem("medbought")) || 0;
 let medCost = Number(localStorage.getItem("medCost")) || 500;
 let medInterval = null;
 
+// UI Elements
+const upgradesPanel = document.getElementById("upgradesPanel");
+const openBtn = document.getElementById("openUpgrades");
+const closeBtn = document.getElementById("closeUpgrades");
+const totalRateEl = document.getElementById("totalrate");
 
-// === Update UI on load ===
+// Toggle upgrades panel with slide
+openBtn.onclick = () => upgradesPanel.classList.add("open");
+closeBtn.onclick = () => upgradesPanel.classList.remove("open");
+
+// Update UI
 const updateUI = () => {
     document.getElementById("batarongsclicked").textContent = `Batarongs: ${batarongs}`;
     document.getElementById("bycount").textContent = ytbought;
@@ -27,32 +34,28 @@ const updateUI = () => {
 
     document.getElementById("sopvcount").textContent = sopvbought;
     document.getElementById("sopvcost").innerHTML = `Cost: ${sopvCost} Batarongs.<br>Gives 1 batarong /sec`;
+    document.getElementById("sopvrate").innerHTML = `<span style="color:limegreen;">Income: +${sopvbought}/sec</span>`;
 
     document.getElementById("medcount").textContent = medbought;
     document.getElementById("medcost").innerHTML = `Cost: ${medCost} Batarongs.<br>Gives 3 batarongs /sec`;
+    document.getElementById("medrate").innerHTML = `<span style="color:limegreen;">Income: +${medbought*3}/sec</span>`;
 
-    const sopvRateEl = document.getElementById("sopvrate");
-    const medRateEl = document.getElementById("medrate");
-    const totalRateEl = document.getElementById("totalrate");
-
-    if (sopvRateEl) sopvRateEl.innerHTML = `<span style="color:limegreen;">Income: +${sopvbought}/sec</span>`;
-    if (medRateEl) medRateEl.innerHTML = `<span style="color:limegreen;">Income: +${medbought * 3}/sec</span>`;
-    if (totalRateEl) totalRateEl.innerHTML = `<span style="color:cyan;">Total Income: +${sopvbought + medbought * 3}/sec</span>`;
+    // Total income
+    const total = sopvbought + medbought*3;
+    totalRateEl.textContent = `Total Income: +${total}/sec`;
 };
 
 updateUI();
 
-
 // === Clicking main button ===
-document.getElementById("batarongbut").onclick = function() {
+document.getElementById("batarongbut").onclick = () => {
     batarongs += increment;
-    document.getElementById("batarongsclicked").textContent = "Batarongs: " + batarongs;
     localStorage.setItem("batarongs", batarongs);
+    updateUI();
 };
 
-
-// === YouTube upgrade (increases click power) ===
-document.getElementById("bataytclick").onclick = function() {
+// === Upgrades ===
+document.getElementById("bataytclick").onclick = () => {
     if (batarongs >= bataytCost) {
         batarongs -= bataytCost;
         increment += 1;
@@ -63,16 +66,11 @@ document.getElementById("bataytclick").onclick = function() {
         localStorage.setItem("increment", increment);
         localStorage.setItem("ytbought", ytbought);
         localStorage.setItem("bataytCost", bataytCost);
-
         updateUI();
-    } else {
-        console.log("Not enough Batarongs");
     }
 };
 
-
-// === SOPV upgrade (+1/sec) ===
-document.getElementById("sopvclick").onclick = function() {
+document.getElementById("sopvclick").onclick = () => {
     if (batarongs >= sopvCost) {
         batarongs -= sopvCost;
         sopvbought += 1;
@@ -81,17 +79,12 @@ document.getElementById("sopvclick").onclick = function() {
         localStorage.setItem("batarongs", batarongs);
         localStorage.setItem("sopvbought", sopvbought);
         localStorage.setItem("sopvCost", sopvCost);
-
         updateUI();
         startSopvInterval();
-    } else {
-        console.log("Not enough Batarongs");
     }
 };
 
-
-// === MED upgrade (+3/sec) ===
-document.getElementById("medclick").onclick = function() {
+document.getElementById("medclick").onclick = () => {
     if (batarongs >= medCost) {
         batarongs -= medCost;
         medbought += 1;
@@ -100,21 +93,16 @@ document.getElementById("medclick").onclick = function() {
         localStorage.setItem("batarongs", batarongs);
         localStorage.setItem("medbought", medbought);
         localStorage.setItem("medCost", medCost);
-
         updateUI();
         startMedInterval();
-    } else {
-        console.log("Not enough Batarongs");
     }
 };
 
-
-// === Start intervals ===
+// === Intervals ===
 function startSopvInterval() {
     if (sopvInterval) clearInterval(sopvInterval);
     sopvInterval = setInterval(() => {
         batarongs += sopvbought;
-        document.getElementById("batarongsclicked").textContent = "Batarongs: " + batarongs;
         localStorage.setItem("batarongs", batarongs);
         updateUI();
     }, 1000);
@@ -123,20 +111,17 @@ function startSopvInterval() {
 function startMedInterval() {
     if (medInterval) clearInterval(medInterval);
     medInterval = setInterval(() => {
-        batarongs += medbought * 3;
-        document.getElementById("batarongsclicked").textContent = "Batarongs: " + batarongs;
+        batarongs += medbought*3;
         localStorage.setItem("batarongs", batarongs);
         updateUI();
     }, 1000);
 }
 
-
-// === Resume intervals if owned ===
+// Resume if owned
 if (sopvbought > 0) startSopvInterval();
 if (medbought > 0) startMedInterval();
 
-
-// === Reset everything ===
+// Reset game
 window.game = {
     Reset: function() {
         batarongs = 0;
