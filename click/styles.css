@@ -64,3 +64,42 @@
     margin: 0;
     font-size: 2em;
 }
+
+.sopv {
+    position: absolute;
+    left: 2220px;
+    bottom: 950px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Remove width and height here */
+}
+
+.sopv button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px; /* space between h2 and img */
+    width: 256px;
+    height: 60px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    margin: 0 auto;
+}
+
+.sopv img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.sopv-count h2 {
+    margin: 0;
+    font-size: 2em;
+}
+
+#sopvrate {
+  color: limegreen;
+  font-weight: bold;
+}

@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    
+    <script>
+        prompt("You may need to zoom out a little bit for the size to be correct.")
+    </script>
 
     <div class="clickhere">
         <p id="batarongsclicked">Batarongs: 0</p>
@@ -29,6 +31,17 @@
         </p>
     </div>
 
+    <div class="sopv">
+        <button id="sopvclick">
+            <span class="sopv-count"><h2 id="sopvcount">0</h2></span>
+            <img src="assets/images/sopv.png">
+        </button>
+        <p id="sopvcost">
+            Cost: 100 Batarongs.<br>
+            Gives 1 batarong /sec
+        </p>
+        <p id="sopvrate">Income: +0/sec</p>
+    </div>
 
     <script src="index.js"></script>
 </body>
