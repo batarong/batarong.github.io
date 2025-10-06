@@ -1,105 +1,101 @@
+body {
+  margin: 0;
+  background-color: #111;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* --- Clicker section --- */
 .clickhere {
-    position: absolute;
-    left: 30px;
-    bottom: 600px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* Remove width and height here */
+  text-align: center;
+  margin-top: 4vh;
 }
 
 .clickhere p {
-    font-size: 90px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0 0 20px 0; /* Add some space below the counter */
+  font-size: clamp(1rem, 3vw, 2rem);
+  margin: 0.5em 0;
+}
+
+#totalrate {
+  color: cyan;
+  font-weight: bold;
+  font-size: clamp(1rem, 2.5vw, 1.8rem);
 }
 
 .clickhere button {
-    width: 550px;
-    height: 500px;
-    padding: 0;
-    border: none;
-    background: transparent;
-    display: block;
-    margin: 0 auto;
+  width: clamp(200px, 30vw, 500px);
+  aspect-ratio: 1 / 1;
+  border: none;
+  background: transparent;
+  cursor: pointer;
 }
 
 .clickhere img {
-    width: 100%;
-    height: 100%;
-    display: block;
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
-
-.batayt {
-    position: absolute;
-    left: 2220px;
-    bottom: 1150px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* Remove width and height here */
+/* --- Upgrade panels --- */
+.upgrades {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 5vh;
+  width: 100%;
 }
 
-.batayt button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px; /* space between h2 and img */
-    width: 256px;
-    height: 60px;
-    padding: 0;
-    border: none;
-    background: transparent;
-    margin: 0 auto;
+.upgrade {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
-.batayt img {
-    width: 100%;
-    height: 100%;
-    display: block;
+.upgrade button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: clamp(180px, 20vw, 256px);
+  height: clamp(40px, 5vh, 60px);
+  border: none;
+  background: transparent;
+  cursor: pointer;
 }
 
-.batayt-count h2 {
-    margin: 0;
-    font-size: 2em;
+.upgrade img {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
-.sopv {
-    position: absolute;
-    left: 2220px;
-    bottom: 950px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* Remove width and height here */
+.upgrade h2 {
+  margin: 0;
+  font-size: clamp(1.2rem, 2vw, 2rem);
 }
 
-.sopv button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px; /* space between h2 and img */
-    width: 256px;
-    height: 60px;
-    padding: 0;
-    border: none;
-    background: transparent;
-    margin: 0 auto;
-}
-
-.sopv img {
-    width: 100%;
-    height: 100%;
-    display: block;
-}
-
-.sopv-count h2 {
-    margin: 0;
-    font-size: 2em;
-}
-
-#sopvrate {
+#sopvrate, #medrate {
   color: limegreen;
   font-weight: bold;
+}
+
+/* --- Responsive layout for wider screens --- */
+@media (min-width: 1000px) {
+  .upgrades {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .upgrade {
+    margin: 0 2rem;
+  }
 }
