@@ -101,7 +101,7 @@ body {
 }
 
 /* Upgrade rates */
-#sopvrate, #medrate {
+#sopvrate, #medrate, #factoryrate {
     color: limegreen;
     font-weight: bold;
 }
@@ -109,7 +109,8 @@ body {
 /* Upgrade buttons layout */
 .batayt button,
 .sopv button,
-.med button {
+.med button,
+.factory button {
     background: #222;           /* dark background */
     border-radius: 12px;
     padding: 10px 15px;
@@ -125,7 +126,8 @@ body {
 /* Hover effect for buttons */
 .batayt button:hover,
 .sopv button:hover,
-.med button:hover {
+.med button:hover,
+.factory button:hover {
     filter: brightness(1.2);
     box-shadow: 0 0 10px rgba(0,255,0,0.3);
 }
@@ -133,7 +135,8 @@ body {
 /* Image inside upgrade buttons */
 .batayt button img,
 .sopv button img,
-.med button img {
+.med button img,
+.factory-count img {
     width: 50px;      /* small and uniform */
     height: 50px;
     object-fit: contain;
@@ -143,7 +146,8 @@ body {
 /* Counter box inside buttons */
 .batayt-count h2,
 .sopv-count h2,
-.med-count h2 {
+.med-count h2,
+.factory-count h2{
     background: #111;           /* dark gray */
     color: limegreen;           /* number color */
     padding: 4px 8px;
@@ -158,7 +162,8 @@ body {
 /* Text label for upgrade inside button */
 .batayt-count,
 .sopv-count,
-.med-count {
+.med-count,
+.factory-count {
     flex-grow: 1;               /* takes available space */
     display: flex;
     align-items: center;

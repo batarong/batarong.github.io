@@ -18,6 +18,12 @@ let medbought = Number(localStorage.getItem("medbought")) || 0;
 let medCost = Number(localStorage.getItem("medCost")) || 500;
 let medInterval = null;
 
+// == Factory ==
+let factorybought = Number(localStorage.getItem("factorybought")) || 0;
+let factoryCost = Number(localStorage.getItem("factoryCost")) || 2000;
+let factoryInterval = null;
+
+
 // == UI Elements ==
 const upgradesPanel = document.getElementById("upgradesPanel");
 const openBtn = document.getElementById("openUpgrades");
@@ -28,23 +34,51 @@ const totalRateEl = document.getElementById("totalrate");
 openBtn.onclick = () => upgradesPanel.classList.add("open");
 closeBtn.onclick = () => upgradesPanel.classList.remove("open");
 
-// === Update UI ===
+// Update UI
 const updateUI = () => {
-    document.getElementById("batarongsclicked").textContent = `Batarongs: ${batarongs}`;
-    document.getElementById("bycount").textContent = ytbought;
-    document.getElementById("bytcost").innerHTML = `Cost: ${bataytCost} Batarongs.<br>Doubles click production`;
+    const batarongEl = document.getElementById("batarongsclicked");
+    if (batarongEl) batarongEl.textContent = `Batarongs: ${batarongs}`;
 
-    document.getElementById("sopvcount").textContent = sopvbought;
-    document.getElementById("sopvcost").innerHTML = `Cost: ${sopvCost} Batarongs.<br>Gives 1 batarong /sec`;
-    document.getElementById("sopvrate").innerHTML = `<span style="color:limegreen;">Income: +${sopvbought}/sec</span>`;
+    const ytCountEl = document.getElementById("bycount");
+    if (ytCountEl) ytCountEl.textContent = ytbought;
 
-    document.getElementById("medcount").textContent = medbought;
-    document.getElementById("medcost").innerHTML = `Cost: ${medCost} Batarongs.<br>Gives 3 batarongs /sec<br>Triples Click Production`;
-    document.getElementById("medrate").innerHTML = `<span style="color:limegreen;">Income: +${medbought * 3}/sec</span>`;
+    const ytCostEl = document.getElementById("bytcost");
+    if (ytCostEl) ytCostEl.innerHTML = `Cost: ${bataytCost} Batarongs.<br>Increases Click Value by 1`;
 
-    const total = sopvbought + medbought * 3;
-    totalRateEl.textContent = `Total Income: +${total}/sec`;
+    const sopvCountEl = document.getElementById("sopvcount");
+    if (sopvCountEl) sopvCountEl.textContent = sopvbought;
+
+    const sopvCostEl = document.getElementById("sopvcost");
+    if (sopvCostEl) sopvCostEl.innerHTML = `Cost: ${sopvCost} Batarongs.<br>Gives 1 batarong /sec`;
+
+    const sopvRateEl = document.getElementById("sopvrate");
+    if (sopvRateEl) sopvRateEl.innerHTML = `<span style="color:limegreen;">Income: +${sopvbought}/sec</span>`;
+
+    const medCountEl = document.getElementById("medcount");
+    if (medCountEl) medCountEl.textContent = medbought;
+
+    const medCostEl = document.getElementById("medcost");
+    if (medCostEl) medCostEl.innerHTML = `Cost: ${medCost} Batarongs.<br>Gives 3 batarongs /sec<br>Triples Click Production`;
+
+    const medRateEl = document.getElementById("medrate");
+    if (medRateEl) medRateEl.innerHTML = `<span style="color:limegreen;">Income: +${medbought*3}/sec</span>`;
+
+    const factoryCountEl = document.getElementById("factorycount");
+    if (factoryCountEl) factoryCountEl.textContent = factorybought;
+
+    const factoryCostEl = document.getElementById("factorycost");
+    if (factoryCostEl) factoryCostEl.innerHTML = `Cost: ${factoryCost} Batarongs.<br>Gives 10 batarongs /sec`;
+
+    const factoryRateEl = document.getElementById("factoryrate");
+    if (factoryRateEl) factoryRateEl.innerHTML = `<span style="color:limegreen;">Income: +${factorybought*10}/sec</span>`;
+
+    const totalRateEl = document.getElementById("totalrate");
+    if (totalRateEl) {
+        const total = sopvbought + medbought*3 + factorybought*10;
+        totalRateEl.textContent = `Total Income: +${total}/sec`;
+    }
 };
+
 
 updateUI();
 
@@ -55,7 +89,9 @@ document.getElementById("batarongbut").onclick = () => {
     updateUI();
 };
 
-// === Upgrades ===
+// === Upgrade click handlers ===
+
+// --- YouTube (+1 click) ---
 document.getElementById("bataytclick").onclick = () => {
     if (batarongs >= bataytCost) {
         batarongs -= bataytCost;
@@ -67,10 +103,12 @@ document.getElementById("bataytclick").onclick = () => {
         localStorage.setItem("increment", increment);
         localStorage.setItem("ytbought", ytbought);
         localStorage.setItem("bataytCost", bataytCost);
+
         updateUI();
     }
 };
 
+// --- SOPV (+1/sec) ---
 document.getElementById("sopvclick").onclick = () => {
     if (batarongs >= sopvCost) {
         batarongs -= sopvCost;
@@ -80,23 +118,43 @@ document.getElementById("sopvclick").onclick = () => {
         localStorage.setItem("batarongs", batarongs);
         localStorage.setItem("sopvbought", sopvbought);
         localStorage.setItem("sopvCost", sopvCost);
+
         updateUI();
         startSopvInterval();
     }
 };
 
+// --- MED (+3/sec & triples click production) ---
 document.getElementById("medclick").onclick = () => {
     if (batarongs >= medCost) {
         batarongs -= medCost;
         medbought += 1;
-        increment += 3;
+        increment += 3; // triples click production
         medCost = Math.ceil(medCost * 1.25);
 
         localStorage.setItem("batarongs", batarongs);
         localStorage.setItem("medbought", medbought);
         localStorage.setItem("medCost", medCost);
+
         updateUI();
         startMedInterval();
+    }
+};
+
+// --- Factory (+10/sec, no click bonus) ---
+document.getElementById("factoryclick").onclick = () => {
+    if (batarongs >= factoryCost) {
+        batarongs -= factoryCost;
+        factorybought += 1;           // increment factory count
+        factoryCost = Math.ceil(factoryCost * 1.25);  // increase cost
+
+        // Save to localStorage
+        localStorage.setItem("batarongs", batarongs);
+        localStorage.setItem("factorybought", factorybought);
+        localStorage.setItem("factoryCost", factoryCost);
+
+        updateUI();
+        startFactoryInterval();       // start interval that adds 10/sec per factory
     }
 };
 
@@ -119,8 +177,52 @@ function startMedInterval() {
     }, 1000);
 }
 
+function startFactoryInterval() {
+    if (factoryInterval) clearInterval(factoryInterval);
+    factoryInterval = setInterval(() => {
+        batarongs += factorybought * 10;
+        localStorage.setItem("batarongs", batarongs);
+        updateUI();
+    }, 1000);
+}
+
+// Resume intervals if player owns upgrades
 if (sopvbought > 0) startSopvInterval();
 if (medbought > 0) startMedInterval();
+if (factorybought > 0) startFactoryInterval();
+
+
+// === Intervals ===
+function startSopvInterval() {
+    if (sopvInterval) clearInterval(sopvInterval);
+    sopvInterval = setInterval(() => {
+        batarongs += sopvbought;
+        localStorage.setItem("batarongs", batarongs);
+        updateUI();
+    }, 1000);
+}
+
+function startMedInterval() {
+    if (medInterval) clearInterval(medInterval);
+    medInterval = setInterval(() => {
+        batarongs += medbought * 3;
+        localStorage.setItem("batarongs", batarongs);
+        updateUI();
+    }, 1000);
+}
+
+function startFactoryInterval() {
+    if (factoryInterval) clearInterval(factoryInterval);
+    factoryInterval = setInterval(() => {
+        batarongs += factorybought * 10;
+        localStorage.setItem("batarongs", batarongs);
+        updateUI();
+    }, 1000);
+}
+
+if (sopvbought > 0) startSopvInterval();
+if (medbought > 0) startMedInterval();
+if (factorybought > 0) startFactoryInterval();
 
 // === Global Game Object ===
 window.game = {
@@ -138,10 +240,14 @@ window.game = {
         medbought = 0;
         medCost = 500;
 
+        factorybought = 0;
+        factoryCost = 2000
+
         localStorage.clear();
 
         if (sopvInterval) clearInterval(sopvInterval);
         if (medInterval) clearInterval(medInterval);
+        if (factoryInterval) clearInterval(factoryInterval);
 
         updateUI();
         console.log("♻️ Game fully reset to defaults.");
