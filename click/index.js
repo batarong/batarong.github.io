@@ -23,18 +23,22 @@ let factorybought = Number(localStorage.getItem("factorybought")) || 0;
 let factoryCost = Number(localStorage.getItem("factoryCost")) || 2000;
 let factoryInterval = null;
 
+// == Foxxer ==
+let foxxerbought = Number(localStorage.getItem("foxxerbought")) || 0;
+let foxxerCost = Number(localStorage.getItem("foxxerCost")) || 10000;
+let foxxerInterval = null;
+
 
 // == UI Elements ==
 const upgradesPanel = document.getElementById("upgradesPanel");
 const openBtn = document.getElementById("openUpgrades");
 const closeBtn = document.getElementById("closeUpgrades");
-const totalRateEl = document.getElementById("totalrate");
 
-// === Toggle upgrades panel with slide ===
+// === Toggle upgrades panel ===
 openBtn.onclick = () => upgradesPanel.classList.add("open");
 closeBtn.onclick = () => upgradesPanel.classList.remove("open");
 
-// Update UI
+// === Update UI ===
 const updateUI = () => {
     const batarongEl = document.getElementById("batarongsclicked");
     if (batarongEl) batarongEl.textContent = `Batarongs: ${batarongs}`;
@@ -49,7 +53,7 @@ const updateUI = () => {
     if (sopvCountEl) sopvCountEl.textContent = sopvbought;
 
     const sopvCostEl = document.getElementById("sopvcost");
-    if (sopvCostEl) sopvCostEl.innerHTML = `Cost: ${sopvCost} Batarongs.<br>Gives 1 batarong /sec`;
+    if (sopvCostEl) sopvCostEl.innerHTML = `Cost: ${sopvCost} Batarongs.<br>Gives 1 batarong/sec`;
 
     const sopvRateEl = document.getElementById("sopvrate");
     if (sopvRateEl) sopvRateEl.innerHTML = `<span style="color:limegreen;">Income: +${sopvbought}/sec</span>`;
@@ -58,109 +62,127 @@ const updateUI = () => {
     if (medCountEl) medCountEl.textContent = medbought;
 
     const medCostEl = document.getElementById("medcost");
-    if (medCostEl) medCostEl.innerHTML = `Cost: ${medCost} Batarongs.<br>Gives 3 batarongs /sec<br>Triples Click Production`;
+    if (medCostEl) medCostEl.innerHTML = `Cost: ${medCost} Batarongs.<br>Gives 3 batarongs/sec<br>Triples Click Production`;
 
     const medRateEl = document.getElementById("medrate");
-    if (medRateEl) medRateEl.innerHTML = `<span style="color:limegreen;">Income: +${medbought*3}/sec</span>`;
+    if (medRateEl) medRateEl.innerHTML = `<span style="color:limegreen;">Income: +${medbought * 3}/sec</span>`;
 
     const factoryCountEl = document.getElementById("factorycount");
     if (factoryCountEl) factoryCountEl.textContent = factorybought;
 
     const factoryCostEl = document.getElementById("factorycost");
-    if (factoryCostEl) factoryCostEl.innerHTML = `Cost: ${factoryCost} Batarongs.<br>Gives 10 batarongs /sec`;
+    if (factoryCostEl) factoryCostEl.innerHTML = `Cost: ${factoryCost} Batarongs.<br>Gives 10 batarongs/sec`;
 
     const factoryRateEl = document.getElementById("factoryrate");
-    if (factoryRateEl) factoryRateEl.innerHTML = `<span style="color:limegreen;">Income: +${factorybought*10}/sec</span>`;
+    if (factoryRateEl) factoryRateEl.innerHTML = `<span style="color:limegreen;">Income: +${factorybought * 10}/sec</span>`;
+
+    const foxxerCountEl = document.getElementById("foxxercount");
+    if (foxxerCountEl) foxxerCountEl.textContent = foxxerbought;
+
+    const foxxerCostEl = document.getElementById("foxxercost");
+    if (foxxerCostEl) foxxerCostEl.innerHTML = `Cost: ${foxxerCost} Batarongs.<br>Gives 20 batarongs/sec<br>+8 Click Power`;
+
+    const foxxerRateEl = document.getElementById("foxxerrate");
+    if (foxxerRateEl) foxxerRateEl.innerHTML = `<span style="color:limegreen;">Income: +${foxxerbought * 20}/sec</span>`;
 
     const totalRateEl = document.getElementById("totalrate");
     if (totalRateEl) {
-        const total = sopvbought + medbought*3 + factorybought*10;
+        const total = sopvbought + (medbought * 3) + (factorybought * 10) + (foxxerbought * 20);
         totalRateEl.textContent = `Total Income: +${total}/sec`;
     }
 };
-
-
 updateUI();
 
-// === Clicking main button ===
+// === Click main button ===
 document.getElementById("batarongbut").onclick = () => {
     batarongs += increment;
     localStorage.setItem("batarongs", batarongs);
     updateUI();
 };
 
-// === Upgrade click handlers ===
+// === Upgrades ===
 
-// --- YouTube (+1 click) ---
+// YouTube (+1 click)
 document.getElementById("bataytclick").onclick = () => {
     if (batarongs >= bataytCost) {
         batarongs -= bataytCost;
         increment += 1;
-        ytbought += 1;
+        ytbought++;
         bataytCost = Math.ceil(bataytCost * 1.2);
-
-        localStorage.setItem("batarongs", batarongs);
-        localStorage.setItem("increment", increment);
-        localStorage.setItem("ytbought", ytbought);
-        localStorage.setItem("bataytCost", bataytCost);
-
+        saveAll();
         updateUI();
     }
 };
 
-// --- SOPV (+1/sec) ---
+// SOPV (+1/sec)
 document.getElementById("sopvclick").onclick = () => {
     if (batarongs >= sopvCost) {
         batarongs -= sopvCost;
-        sopvbought += 1;
+        sopvbought++;
         sopvCost = Math.ceil(sopvCost * 1.2);
-
-        localStorage.setItem("batarongs", batarongs);
-        localStorage.setItem("sopvbought", sopvbought);
-        localStorage.setItem("sopvCost", sopvCost);
-
-        updateUI();
+        saveAll();
         startSopvInterval();
+        updateUI();
     }
 };
 
-// --- MED (+3/sec & triples click production) ---
+// MED (+3/sec & triples click power)
 document.getElementById("medclick").onclick = () => {
     if (batarongs >= medCost) {
         batarongs -= medCost;
-        medbought += 1;
-        increment += 3; // triples click production
+        medbought++;
+        increment *= 3;
         medCost = Math.ceil(medCost * 1.25);
-
-        localStorage.setItem("batarongs", batarongs);
-        localStorage.setItem("medbought", medbought);
-        localStorage.setItem("medCost", medCost);
-
-        updateUI();
+        saveAll();
         startMedInterval();
+        updateUI();
     }
 };
 
-// --- Factory (+10/sec, no click bonus) ---
+// Factory (+10/sec)
 document.getElementById("factoryclick").onclick = () => {
     if (batarongs >= factoryCost) {
         batarongs -= factoryCost;
-        factorybought += 1;           // increment factory count
-        factoryCost = Math.ceil(factoryCost * 1.25);  // increase cost
-
-        // Save to localStorage
-        localStorage.setItem("batarongs", batarongs);
-        localStorage.setItem("factorybought", factorybought);
-        localStorage.setItem("factoryCost", factoryCost);
-
+        factorybought++;
+        factoryCost = Math.ceil(factoryCost * 1.75);
+        saveAll();
+        startFactoryInterval();
         updateUI();
-        startFactoryInterval();       // start interval that adds 10/sec per factory
     }
 };
 
+// Foxxer (+20/sec & +8 click power)
+document.getElementById("foxxerclick").onclick = () => {
+    if (batarongs >= foxxerCost) {
+        batarongs -= foxxerCost;
+        foxxerbought++;
+        increment += 8;
+        foxxerCost = Math.ceil(foxxerCost * 2.1);
+        saveAll();
+        startFoxxerInterval();
+        updateUI();
+    }
+};
+
+// === Save Function ===
+function saveAll() {
+    localStorage.setItem("batarongs", batarongs);
+    localStorage.setItem("increment", increment);
+    localStorage.setItem("ytbought", ytbought);
+    localStorage.setItem("bataytCost", bataytCost);
+    localStorage.setItem("sopvbought", sopvbought);
+    localStorage.setItem("sopvCost", sopvCost);
+    localStorage.setItem("medbought", medbought);
+    localStorage.setItem("medCost", medCost);
+    localStorage.setItem("factorybought", factorybought);
+    localStorage.setItem("factoryCost", factoryCost);
+    localStorage.setItem("foxxerbought", foxxerbought);
+    localStorage.setItem("foxxerCost", foxxerCost);
+}
+
 // === Intervals ===
 function startSopvInterval() {
-    if (sopvInterval) clearInterval(sopvInterval);
+    clearInterval(sopvInterval);
     sopvInterval = setInterval(() => {
         batarongs += sopvbought;
         localStorage.setItem("batarongs", batarongs);
@@ -169,7 +191,7 @@ function startSopvInterval() {
 }
 
 function startMedInterval() {
-    if (medInterval) clearInterval(medInterval);
+    clearInterval(medInterval);
     medInterval = setInterval(() => {
         batarongs += medbought * 3;
         localStorage.setItem("batarongs", batarongs);
@@ -178,7 +200,7 @@ function startMedInterval() {
 }
 
 function startFactoryInterval() {
-    if (factoryInterval) clearInterval(factoryInterval);
+    clearInterval(factoryInterval);
     factoryInterval = setInterval(() => {
         batarongs += factorybought * 10;
         localStorage.setItem("batarongs", batarongs);
@@ -186,123 +208,76 @@ function startFactoryInterval() {
     }, 1000);
 }
 
-// Resume intervals if player owns upgrades
+function startFoxxerInterval() {
+    clearInterval(foxxerInterval);
+    foxxerInterval = setInterval(() => {
+        batarongs += foxxerbought * 20;
+        localStorage.setItem("batarongs", batarongs);
+        updateUI();
+    }, 1000);
+}
+
+// Resume intervals
 if (sopvbought > 0) startSopvInterval();
 if (medbought > 0) startMedInterval();
 if (factorybought > 0) startFactoryInterval();
+if (foxxerbought > 0) startFoxxerInterval();
 
-
-// === Intervals ===
-function startSopvInterval() {
-    if (sopvInterval) clearInterval(sopvInterval);
-    sopvInterval = setInterval(() => {
-        batarongs += sopvbought;
-        localStorage.setItem("batarongs", batarongs);
-        updateUI();
-    }, 1000);
-}
-
-function startMedInterval() {
-    if (medInterval) clearInterval(medInterval);
-    medInterval = setInterval(() => {
-        batarongs += medbought * 3;
-        localStorage.setItem("batarongs", batarongs);
-        updateUI();
-    }, 1000);
-}
-
-function startFactoryInterval() {
-    if (factoryInterval) clearInterval(factoryInterval);
-    factoryInterval = setInterval(() => {
-        batarongs += factorybought * 10;
-        localStorage.setItem("batarongs", batarongs);
-        updateUI();
-    }, 1000);
-}
-
-if (sopvbought > 0) startSopvInterval();
-if (medbought > 0) startMedInterval();
-if (factorybought > 0) startFactoryInterval();
-
-// === Global Game Object ===
+// === Game Object ===
 window.game = {
-    Reset: function() {
-        // Reset all game values to defaults
-        batarongs = 0;
-        increment = 1;
-
-        ytbought = 0;
-        bataytCost = 10;
-
-        sopvbought = 0;
-        sopvCost = 100;
-
-        medbought = 0;
-        medCost = 500;
-
-        factorybought = 0;
-        factoryCost = 2000
-
+    Reset() {
         localStorage.clear();
-
-        if (sopvInterval) clearInterval(sopvInterval);
-        if (medInterval) clearInterval(medInterval);
-        if (factoryInterval) clearInterval(factoryInterval);
-
-        updateUI();
-        console.log("♻️ Game fully reset to defaults.");
+        location.reload(); // simple full reset
     },
 
-    Test: function() {
-        batarongs = 9999;
+    Test() {
+        batarongs = 99999999;
         localStorage.setItem("batarongs", batarongs);
         updateUI();
-        console.log("💰 Test mode: 9999 Batarongs added.");
+        console.log("✅ Test: player granted 99,999,999 Batarongs.");
+    },
+
+    Developer() {
+        createDeveloperMenu();
     }
 };
 
 // === Developer Menu ===
 function createDeveloperMenu() {
-    if (document.querySelector('.developer-menu')) return;
+    if (document.querySelector(".developer-menu")) return;
 
-    const devMenu = document.createElement('div');
-    devMenu.className = 'developer-menu';
+    const devMenu = document.createElement("div");
+    devMenu.className = "developer-menu";
     devMenu.innerHTML = `
         <div class="dev-header">
             <h2>Developer Menu</h2>
             <button id="dev-close">✖</button>
         </div>
         <div id="dev-content">
-            <button id="dev-test">💰 Test (Set 9999 Batarongs)</button>
-            <button id="dev-reset">♻️ Reset Game</button>
+            <button id="dev-test">Test</button>
+            <button id="dev-reset">Reset</button>
         </div>
     `;
     document.body.appendChild(devMenu);
 
-    const header = devMenu.querySelector('.dev-header');
+    // draggable
+    const header = devMenu.querySelector(".dev-header");
     let isDragging = false, offsetX, offsetY;
-
-    header.addEventListener('mousedown', e => {
+    header.addEventListener("mousedown", e => {
         isDragging = true;
         offsetX = e.clientX - devMenu.getBoundingClientRect().left;
         offsetY = e.clientY - devMenu.getBoundingClientRect().top;
     });
-    document.addEventListener('mouseup', () => isDragging = false);
-    document.addEventListener('mousemove', e => {
+    document.addEventListener("mouseup", () => isDragging = false);
+    document.addEventListener("mousemove", e => {
         if (!isDragging) return;
         devMenu.style.left = `${e.clientX - offsetX}px`;
         devMenu.style.top = `${e.clientY - offsetY}px`;
-        devMenu.style.right = 'auto';
-        devMenu.style.transform = 'none';
+        devMenu.style.right = "auto";
+        devMenu.style.transform = "none";
     });
 
     document.getElementById("dev-close").onclick = () => devMenu.remove();
     document.getElementById("dev-test").onclick = () => game.Test();
     document.getElementById("dev-reset").onclick = () => game.Reset();
 }
-
-// ✅ expose dev menu
-window.game.Developer = function() {
-    createDeveloperMenu();
-    console.log("✅ Developer Menu opened.");
-};
