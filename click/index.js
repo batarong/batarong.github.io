@@ -1,4 +1,5 @@
 // === Load saved values or set defaults ===
+let clickPower = Number(localStorage.getItem("clickPower")) || 1;
 
 // == Batarongs ==
 let batarongs = Number(localStorage.getItem("batarongs")) || 0;
@@ -90,6 +91,12 @@ const updateUI = () => {
         const total = sopvbought + (medbought * 3) + (factorybought * 10) + (foxxerbought * 20);
         totalRateEl.textContent = `Total Income: +${total}/sec`;
     }
+
+    const totalClickEl = document.getElementById("totalclick");
+    if (totalClickEl) {
+        const totalclick = clickPower;
+        totalClickEl.textContent = `Total Click Power: +${totalclick}/click`;
+    }
 };
 updateUI();
 
@@ -98,6 +105,10 @@ document.getElementById("batarongbut").onclick = () => {
     batarongs += increment;
     localStorage.setItem("batarongs", batarongs);
     updateUI();
+    if (batarongs == Infinity) {
+        batarongs = 0;
+        updateUI();
+    } ;
 };
 
 // === Upgrades ===
@@ -110,6 +121,8 @@ document.getElementById("bataytclick").onclick = () => {
         ytbought++;
         bataytCost = Math.ceil(bataytCost * 1.2);
         saveAll();
+        clickPower += 1;
+        localStorage.setItem("clickPower", clickPower);
         updateUI();
     }
 };
@@ -131,11 +144,14 @@ document.getElementById("medclick").onclick = () => {
     if (batarongs >= medCost) {
         batarongs -= medCost;
         medbought++;
-        increment *= 3;
+        increment += 3;
         medCost = Math.ceil(medCost * 1.25);
         saveAll();
         startMedInterval();
+        clickPower += 3;
+        localStorage.setItem("clickPower", clickPower);
         updateUI();
+        
     }
 };
 
@@ -156,10 +172,12 @@ document.getElementById("foxxerclick").onclick = () => {
     if (batarongs >= foxxerCost) {
         batarongs -= foxxerCost;
         foxxerbought++;
-        increment += 8;
+        increment += 4;
         foxxerCost = Math.ceil(foxxerCost * 2.1);
         saveAll();
         startFoxxerInterval();
+        clickPower += 4;
+        localStorage.setItem("clickPower", clickPower);
         updateUI();
     }
 };
@@ -178,6 +196,7 @@ function saveAll() {
     localStorage.setItem("factoryCost", factoryCost);
     localStorage.setItem("foxxerbought", foxxerbought);
     localStorage.setItem("foxxerCost", foxxerCost);
+    localStorage.setItem("clickPower", clickPower);
 }
 
 // === Intervals ===
