@@ -1,0 +1,396 @@
+/* Body background */
+body {
+    background-color: #000000; /* full black */
+    color: white; /* default text color */
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+}
+
+/* Main clicker */
+.clickhere {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%); /* slightly more upward to center image */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.clickhere p {
+    font-size: 90px;
+    margin: 0 0 20px 0;
+    color: #ffffff; /* ensure counter text is visible */
+    
+}
+
+.clickhere button {
+    width: 550px;
+    height: 500px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    
+}
+
+.clickhere img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    
+}
+
+/* Upgrade panel */
+.upgrades-panel {
+    position: fixed;
+    top: 50px;
+    right: -400px; /* offscreen initially */
+    width: 350px;
+    max-height: 80vh;
+    background: #000000; /* full black panel */
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(255,255,255,0.2); /* subtle glow for visibility */
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 1000;
+    transition: right 0.5s ease; /* smooth slide */
+    
+}
+
+.upgrades-panel.open {
+    right: 50px; /* slide-in position */
+    
+}
+
+.close-btn {
+    align-self: flex-end;
+    background: #ff0000;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.upgrade-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Toggle button */
+.upgrade-toggle-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    background: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+/* Total income display */
+#totalrate {
+    color: #00bfff; /* light blue */
+    font-size: 1em; /* slightly smaller */
+    font-weight: bold;
+}
+
+/* Total click display */
+#totalclick {
+    color: #00bfff; /* light blue */
+    font-size: 1em; /* slightly smaller */
+    font-weight: bold;
+}
+
+/* Upgrade rates */
+#sopvrate, #medrate, #factoryrate, #foxxerrate {
+    color: limegreen;
+    font-weight: bold;
+}
+
+/* Upgrade buttons layout */
+.batayt button,
+.sopv button,
+.med button,
+.factory button,
+.foxxer button {
+    background: #222;           /* dark background */
+    border-radius: 12px;
+    padding: 10px 15px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* space between text/counter and image */
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0,255,0,0.2);
+}
+
+/* Hover effect for buttons */
+.batayt button:hover,
+.sopv button:hover,
+.med button:hover,
+.factory button:hover,
+.foxxer button:hover {
+    filter: brightness(1.2);
+    box-shadow: 0 0 10px rgba(0,255,0,0.3);
+}
+
+/* Image inside upgrade buttons */
+.batayt button img,
+.sopv button img,
+.med button img,
+.factory button img,
+.foxxer button img {
+    width: 50px;      /* small and uniform */
+    height: 50px;
+    object-fit: contain;
+    margin-left: 10px; /* spacing from counter/text */
+}
+
+/* Counter box inside buttons */
+.batayt-count h2,
+.sopv-count h2,
+.med-count h2,
+.factory-count h2,
+.foxxer-count h2 {
+    background: #111;           /* dark gray */
+    color: limegreen;           /* number color */
+    padding: 4px 8px;
+    border-radius: 6px;
+    min-width: 35px;
+    text-align: center;
+    font-size: 1.5em;
+    box-shadow: 0 0 5px rgba(0,255,0,0.3);
+    margin: 0;
+}
+
+/* Text label for upgrade inside button */
+.batayt-count,
+.sopv-count,
+.med-count,
+.factory-count,
+.foxxer-count {
+    flex-grow: 1;               /* takes available space */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+/* Buttons hover effect for all */
+button:hover {
+    filter: brightness(1.2);
+}
+
+/* Optional: make input text or counters more readable */
+h2, p {
+    color: white;
+}
+
+/* Report bug button */
+.report-bug-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    padding: 10px 15px;
+    border-radius: 5px; /* rounded like a pebble */
+    background: #f44336; /* red button */
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    z-index: 1002;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.3); /* subtle shadow */
+    transition: all 0.2s ease;
+}
+
+.report-bug-btn:hover {
+    background: #e53935; /* darker red */
+    transform: translateY(-2px); /* lift effect */
+    box-shadow: 0 6px 12px rgba(0,0,0,0.4); /* bigger shadow on hover */
+}
+
+/* Developer Menu */
+.developer-menu {
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #111;
+    color: #fff;
+    border: 2px solid #00ff00;
+    border-radius: 12px;
+    width: 400px;
+    padding: 15px;
+    z-index: 2000;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+    font-family: monospace;
+    cursor: default;
+}
+
+.developer-menu .dev-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #00ff00;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    user-select: none;
+}
+
+#dev-close {
+    background: red;
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
+    padding: 3px 8px;
+    cursor: pointer;
+}
+#dev-close:hover {
+    background: darkred;
+}
+
+/* Dev buttons */
+#dev-content button {
+    background: #222;
+    color: #00ff00;
+    border: 1px solid #00ff00;
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin: 6px 0;
+    width: 100%;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+#dev-content button:hover {
+    background: #00ff00;
+    color: #000;
+    transform: translateY(-2px);
+}
+
+
+/* ================================
+   📱 RESPONSIVE MOBILE FIX (2025)
+   ================================ */
+@media (max-width: 900px) {
+
+  body {
+    font-size: 16px;
+    overflow-x: hidden;
+  }
+
+  /* MAIN CLICKER SECTION */
+  .clickhere {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    margin-top: 8vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .clickhere p {
+    font-size: clamp(16px, 5vw, 32px);
+    text-align: center;
+    margin: 0.5em 0;
+  }
+
+  /* MAIN BUTTON (Batarong) */
+  #batarongbut {
+    width: 80vw;       /* scales to 80% of screen width */
+    height: auto;
+    max-width: 400px;
+    aspect-ratio: 1 / 1; /* keeps square shape */
+    padding: 0;
+  }
+
+  .clickhere img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+  }
+
+  /* PANEL FIX */
+  .upgrades-panel {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100vh;
+    background: #000;
+    border-radius: 0;
+    overflow-y: auto;
+    transition: right 0.4s ease;
+    padding: 15px;
+    box-shadow: none;
+    z-index: 1000;
+  }
+
+  .upgrades-panel.open {
+    right: 0;
+  }
+
+  .upgrade-item {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .upgrade-item p {
+    font-size: 0.9em;
+    text-align: center;
+  }
+
+  .upgrade-item img {
+    width: 48px;
+    height: 48px;
+  }
+
+  /* BUTTONS */
+  .upgrade-toggle-btn {
+    bottom: 15px;
+    top: auto;
+    right: 15px;
+    position: fixed;
+    padding: 10px 18px;
+    border-radius: 8px;
+    z-index: 2000;
+  }
+
+  .report-bug-btn {
+    bottom: 15px;
+    top: auto;
+    left: 15px;
+    position: fixed;
+    padding: 10px 18px;
+    z-index: 2000;
+  }
+
+  /* TEXT SIZE TWEAKS */
+  #totalrate,
+  #totalclick,
+  #batarongsclicked {
+    font-size: clamp(14px, 5vw, 24px);
+  }
+}
