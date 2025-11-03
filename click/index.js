@@ -48,7 +48,7 @@ const updateUI = () => {
     if (ytCountEl) ytCountEl.textContent = ytbought;
 
     const ytCostEl = document.getElementById("bytcost");
-    if (ytCostEl) ytCostEl.innerHTML = `Cost: ${bataytCost} Batarongs.<br>Increases Click Value by 1`;
+    if (ytCostEl) ytCostEl.innerHTML = `Cost: ${bataytCost} Batarongs.<br>+1 Click Power`;
 
     const sopvCountEl = document.getElementById("sopvcount");
     if (sopvCountEl) sopvCountEl.textContent = sopvbought;
@@ -63,7 +63,7 @@ const updateUI = () => {
     if (medCountEl) medCountEl.textContent = medbought;
 
     const medCostEl = document.getElementById("medcost");
-    if (medCostEl) medCostEl.innerHTML = `Cost: ${medCost} Batarongs.<br>Gives 3 batarongs/sec<br>Triples Click Production`;
+    if (medCostEl) medCostEl.innerHTML = `Cost: ${medCost} Batarongs.<br>Gives 3 batarongs/sec<br>+8 Click Power`;
 
     const medRateEl = document.getElementById("medrate");
     if (medRateEl) medRateEl.innerHTML = `<span style="color:limegreen;">Income: +${medbought * 3}/sec</span>`;
