@@ -211,6 +211,22 @@ h2, p {
     transition: all 0.2s ease;
 }
 
+.mobile-btn {
+    position: fixed;
+    top: 20px;
+    left: 160px;
+    padding: 10px 15px;
+    border-radius: 5px; /* rounded like a pebble */
+    background: #f44336; /* red button */
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    z-index: 1002;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.3); /* subtle shadow */
+    transition: all 0.2s ease;
+}
+
 .report-bug-btn:hover {
     background: #e53935; /* darker red */
     transform: translateY(-2px); /* lift effect */
